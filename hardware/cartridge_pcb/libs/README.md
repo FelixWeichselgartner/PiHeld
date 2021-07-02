@@ -18,7 +18,7 @@ Nintendo DS GameBoy Cartridge Adapter
 * https://github.com/JRodrigoTech/Eagle-Libraries.git
 * CC BY-SA 4.0 License
 
-## Adafruit (in folder `Adafruit/`)
+## Adafruit
 
 ADS1x15 I²C-ADC (ADS1X15-Breakout-Board-PCBs):
 * https://github.com/adafruit/ADS1X15-Breakout-Board-PCBs
