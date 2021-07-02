@@ -1,0 +1,1 @@
+g++ main.cpp GPIO.cpp -lwiringPi -o pintester.out
