@@ -10,9 +10,10 @@ The hardware is licensed with:
 
 ## Software
 
-The cartridge code (`software/code/`) is licensed with `CC BY-NC 3.0`.
-The utilities code (`software/utilities/`) is licensed with `MIT License`.
+The software is licensed with:
+* cartridge code (`software/code/`): `CC BY-NC 3.0`.
+* utilities code (`software/utilities/`): `MIT License`.
 
-## Tester
+## Tests
 
-The testers are licensed with `MIT License`.
+The tests are licensed with `MIT License`.
