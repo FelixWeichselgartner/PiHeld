@@ -9403,10 +9403,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 &lt;li&gt;LED-RGB-CC&lt;/li&gt;</description>
 <wire x1="2.5" y1="-1" x2="2.5" y2="1" width="0.127" layer="51"/>
 <wire x1="2.5" y1="-1" x2="2.5" y2="1" width="0.127" layer="51" curve="-316.397181"/>
-<pad name="2" x="0.635" y="0" drill="0.762" diameter="0.889" shape="long" rot="R90"/>
-<pad name="1" x="1.905" y="0" drill="0.762" diameter="0.889" shape="long" rot="R90"/>
-<pad name="3" x="-0.635" y="0" drill="0.762" diameter="0.889" shape="long" rot="R90"/>
-<pad name="4" x="-1.905" y="0" drill="0.762" diameter="0.889" shape="long" rot="R90"/>
+<pad name="2" x="0.889" y="0" drill="0.762" diameter="0.889" shape="long" rot="R90"/>
+<pad name="1" x="2.54" y="0" drill="0.762" diameter="0.889" shape="long" rot="R90"/>
+<pad name="3" x="-0.889" y="0" drill="0.762" diameter="0.889" shape="long" rot="R90"/>
+<pad name="4" x="-2.54" y="0" drill="0.762" diameter="0.889" shape="long" rot="R90"/>
 <wire x1="2.5" y1="-1" x2="2.5" y2="1" width="0.127" layer="22"/>
 <text x="0" y="2.8575" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
 <text x="0" y="-2.8575" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
@@ -11881,10 +11881,8 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
-<part name="R39" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="470R"/>
 <part name="R40" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="470R"/>
 <part name="R41" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="470R"/>
-<part name="Q5" library="transistors_gaui" deviceset="2N7002" device=""/>
 <part name="P+5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="+3V3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+3V3" device=""/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
@@ -11938,7 +11936,15 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="TP6" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="TP10R" package3d_urn="urn:adsk.eagle:package:27959/1"/>
 <part name="TP7" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="TP10R" package3d_urn="urn:adsk.eagle:package:27959/1"/>
 <part name="TP8" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="TP10R" package3d_urn="urn:adsk.eagle:package:27959/1"/>
-<part name="TP9" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="TP10R" package3d_urn="urn:adsk.eagle:package:27959/1"/>
+<part name="Q6" library="transistors_gaui" deviceset="2N7002" device=""/>
+<part name="R50" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="100K"/>
+<part name="GND19" library="supply1" deviceset="GND" device=""/>
+<part name="TP10" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="PTR1" device="TP10R" package3d_urn="urn:adsk.eagle:package:27959/1"/>
+<part name="R39" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="470R"/>
+<part name="Q5" library="transistors_gaui" deviceset="2N7002" device=""/>
+<part name="Q7" library="transistors_gaui" deviceset="2N7002" device=""/>
+<part name="R51" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K"/>
+<part name="GND20" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -11958,6 +11964,10 @@ or an IC (for speeds up to ~10MHz).</text>
 <text x="86.36" y="2.54" size="1.778" layer="91">You can add additional buttons (on the back) right here</text>
 <text x="345.44" y="-17.78" size="1.778" layer="91">If you want to use this pcb as a breakout
 to connect to your normal Raspberry Pi.</text>
+<text x="276.86" y="139.7" size="1.778" layer="91">Or 390K,
+depending on
+what is
+available</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="5.08" y="20.32" smashed="yes">
@@ -12199,22 +12209,16 @@ to connect to your normal Raspberry Pi.</text>
 <instance part="+3V5" gate="G$1" x="312.42" y="73.66" smashed="yes">
 <attribute name="VALUE" x="309.88" y="68.58" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="D1" gate="G$1" x="187.96" y="167.64" smashed="yes" rot="R270">
-<attribute name="NAME" x="193.3575" y="175.26" size="1.778" layer="95" font="vector" rot="R270"/>
-<attribute name="VALUE" x="182.5625" y="175.26" size="1.778" layer="95" font="vector" rot="R270" align="top-left"/>
+<instance part="D1" gate="G$1" x="187.96" y="160.02" smashed="yes" rot="R270">
+<attribute name="NAME" x="193.3575" y="167.64" size="1.778" layer="95" font="vector" rot="R270"/>
+<attribute name="VALUE" x="182.5625" y="167.64" size="1.778" layer="95" font="vector" rot="R270" align="top-left"/>
 </instance>
 <instance part="GND7" gate="1" x="167.64" y="193.04" smashed="yes">
 <attribute name="VALUE" x="165.1" y="190.5" size="1.778" layer="96"/>
 </instance>
-<instance part="P+2" gate="1" x="215.9" y="182.88" smashed="yes">
-<attribute name="VALUE" x="213.36" y="177.8" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="GND8" gate="1" x="233.68" y="180.34" smashed="yes">
-<attribute name="VALUE" x="231.14" y="177.8" size="1.778" layer="96"/>
-</instance>
-<instance part="R39" gate="G$1" x="208.28" y="177.8" smashed="yes">
-<attribute name="NAME" x="204.47" y="179.2986" size="1.778" layer="95"/>
-<attribute name="VALUE" x="204.47" y="174.498" size="1.778" layer="96"/>
+<instance part="P+2" gate="1" x="215.9" y="182.88" smashed="yes"/>
+<instance part="GND8" gate="1" x="233.68" y="175.26" smashed="yes">
+<attribute name="VALUE" x="231.14" y="172.72" size="1.778" layer="96"/>
 </instance>
 <instance part="R40" gate="G$1" x="180.34" y="185.42" smashed="yes" rot="R270">
 <attribute name="NAME" x="181.8386" y="189.23" size="1.778" layer="95" rot="R270"/>
@@ -12223,10 +12227,6 @@ to connect to your normal Raspberry Pi.</text>
 <instance part="R41" gate="G$1" x="187.96" y="185.42" smashed="yes" rot="R270">
 <attribute name="NAME" x="189.4586" y="189.23" size="1.778" layer="95" rot="R270"/>
 <attribute name="VALUE" x="184.658" y="184.15" size="1.778" layer="96" rot="R270"/>
-</instance>
-<instance part="Q5" gate="G$1" x="198.12" y="182.88" smashed="yes" rot="R270">
-<attribute name="VALUE" x="198.12" y="194.31" size="1.778" layer="96" rot="R270"/>
-<attribute name="NAME" x="200.66" y="194.31" size="1.778" layer="95" rot="R270"/>
 </instance>
 <instance part="P+5" gate="1" x="322.58" y="40.64" smashed="yes">
 <attribute name="VALUE" x="320.04" y="35.56" size="1.778" layer="96" rot="R90"/>
@@ -12301,8 +12301,8 @@ to connect to your normal Raspberry Pi.</text>
 <attribute name="NAME" x="247.65" y="215.265" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="247.65" y="223.52" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="GND14" gate="1" x="187.96" y="149.86" smashed="yes">
-<attribute name="VALUE" x="185.42" y="147.32" size="1.778" layer="96"/>
+<instance part="GND14" gate="1" x="187.96" y="142.24" smashed="yes">
+<attribute name="VALUE" x="185.42" y="139.7" size="1.778" layer="96"/>
 </instance>
 <instance part="R45" gate="G$1" x="314.96" y="175.26" smashed="yes" rot="R180">
 <attribute name="NAME" x="318.77" y="173.7614" size="1.778" layer="95" rot="R180"/>
@@ -12476,9 +12476,39 @@ to connect to your normal Raspberry Pi.</text>
 <attribute name="NAME" x="310.896" y="199.39" size="1.778" layer="95" rot="R270"/>
 <attribute name="TP_SIGNAL_NAME" x="308.61" y="195.58" size="1.778" layer="97" rot="R180"/>
 </instance>
-<instance part="TP9" gate="G$1" x="317.5" y="-2.54" smashed="yes">
-<attribute name="NAME" x="316.484" y="-8.89" size="1.778" layer="95" rot="R90"/>
-<attribute name="TP_SIGNAL_NAME" x="318.77" y="-5.08" size="1.778" layer="97"/>
+<instance part="Q6" gate="G$1" x="299.72" y="220.98" smashed="yes">
+<attribute name="VALUE" x="290.83" y="226.06" size="1.778" layer="96"/>
+<attribute name="NAME" x="290.83" y="228.6" size="1.778" layer="95"/>
+</instance>
+<instance part="R50" gate="G$1" x="304.8" y="231.14" smashed="yes" rot="R90">
+<attribute name="NAME" x="303.3014" y="227.33" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="308.102" y="227.33" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="GND19" gate="1" x="304.8" y="213.36" smashed="yes">
+<attribute name="VALUE" x="302.26" y="210.82" size="1.778" layer="96"/>
+</instance>
+<instance part="TP10" gate="G$1" x="314.96" y="226.06" smashed="yes" rot="R180">
+<attribute name="NAME" x="315.976" y="232.41" size="1.778" layer="95" rot="R270"/>
+<attribute name="TP_SIGNAL_NAME" x="313.69" y="228.6" size="1.778" layer="97" rot="R180"/>
+</instance>
+<instance part="R39" gate="G$1" x="205.74" y="177.8" smashed="yes">
+<attribute name="NAME" x="201.93" y="179.2986" size="1.778" layer="95"/>
+<attribute name="VALUE" x="201.93" y="174.498" size="1.778" layer="96"/>
+</instance>
+<instance part="Q5" gate="G$1" x="198.12" y="185.42" smashed="yes" rot="R270">
+<attribute name="VALUE" x="198.12" y="196.85" size="1.778" layer="96" rot="R270"/>
+<attribute name="NAME" x="200.66" y="196.85" size="1.778" layer="95" rot="R270"/>
+</instance>
+<instance part="Q7" gate="G$1" x="215.9" y="200.66" smashed="yes" rot="R180">
+<attribute name="VALUE" x="224.79" y="195.58" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="224.79" y="193.04" size="1.778" layer="95" rot="R180"/>
+</instance>
+<instance part="R51" gate="G$1" x="210.82" y="185.42" smashed="yes" rot="R270">
+<attribute name="NAME" x="212.3186" y="189.23" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="207.518" y="189.23" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="GND20" gate="1" x="205.74" y="200.66" smashed="yes">
+<attribute name="VALUE" x="203.2" y="198.12" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -12579,16 +12609,6 @@ to connect to your normal Raspberry Pi.</text>
 <pinref part="U$1" gate="G$1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="JP3" gate="A" pin="5"/>
-<wire x1="223.52" y1="182.88" x2="228.6" y2="182.88" width="0.1524" layer="91"/>
-<pinref part="GND8" gate="1" pin="GND"/>
-<pinref part="JP3" gate="A" pin="7"/>
-<wire x1="228.6" y1="182.88" x2="233.68" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="223.52" y1="177.8" x2="228.6" y2="177.8" width="0.1524" layer="91"/>
-<wire x1="228.6" y1="177.8" x2="228.6" y2="182.88" width="0.1524" layer="91"/>
-<junction x="228.6" y="182.88"/>
-</segment>
-<segment>
 <pinref part="GND4" gate="1" pin="GND"/>
 <wire x1="322.58" y1="-12.7" x2="325.12" y2="-10.16" width="0.1524" layer="91"/>
 <wire x1="325.12" y1="0" x2="325.12" y2="-2.54" width="0.1524" layer="91"/>
@@ -12627,9 +12647,9 @@ to connect to your normal Raspberry Pi.</text>
 <pinref part="JP2" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="GND14" gate="1" pin="GND"/>
 <pinref part="D1" gate="G$1" pin="C"/>
-<wire x1="187.96" y1="152.4" x2="187.96" y2="154.94" width="0.1524" layer="91"/>
+<pinref part="GND14" gate="1" pin="GND"/>
+<wire x1="187.96" y1="144.78" x2="187.96" y2="147.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND12" gate="1" pin="GND"/>
@@ -12663,6 +12683,26 @@ to connect to your normal Raspberry Pi.</text>
 <pinref part="IC1" gate="G$1" pin="ADJ"/>
 <pinref part="GND9" gate="1" pin="GND"/>
 <wire x1="368.3" y1="22.86" x2="368.3" y2="20.32" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="Q6" gate="G$1" pin="S"/>
+<wire x1="304.8" y1="218.44" x2="304.8" y2="215.9" width="0.1524" layer="91"/>
+<pinref part="GND19" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="JP3" gate="A" pin="5"/>
+<wire x1="223.52" y1="182.88" x2="228.6" y2="182.88" width="0.1524" layer="91"/>
+<pinref part="JP3" gate="A" pin="7"/>
+<wire x1="223.52" y1="177.8" x2="228.6" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="177.8" x2="228.6" y2="182.88" width="0.1524" layer="91"/>
+<pinref part="GND8" gate="1" pin="GND"/>
+<wire x1="228.6" y1="177.8" x2="233.68" y2="177.8" width="0.1524" layer="91"/>
+<junction x="228.6" y="177.8"/>
+</segment>
+<segment>
+<pinref part="GND20" gate="1" pin="GND"/>
+<pinref part="Q7" gate="G$1" pin="S"/>
+<wire x1="205.74" y1="203.2" x2="210.82" y2="203.2" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VCC" class="0">
@@ -13166,13 +13206,16 @@ to connect to your normal Raspberry Pi.</text>
 <wire x1="45.72" y1="167.64" x2="45.72" y2="172.72" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R39" gate="G$1" pin="2"/>
 <pinref part="P+2" gate="1" pin="+5V"/>
-<wire x1="215.9" y1="180.34" x2="215.9" y2="177.8" width="0.1524" layer="91"/>
-<wire x1="215.9" y1="177.8" x2="213.36" y2="177.8" width="0.1524" layer="91"/>
 <pinref part="JP3" gate="A" pin="8"/>
 <wire x1="223.52" y1="175.26" x2="215.9" y2="175.26" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="175.26" x2="215.9" y2="177.8" width="0.1524" layer="91"/>
+<pinref part="R39" gate="G$1" pin="2"/>
+<pinref part="R51" gate="G$1" pin="2"/>
+<wire x1="215.9" y1="177.8" x2="215.9" y2="180.34" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="180.34" x2="210.82" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="177.8" x2="215.9" y2="177.8" width="0.1524" layer="91"/>
+<junction x="210.82" y="177.8"/>
 <junction x="215.9" y="177.8"/>
 </segment>
 <segment>
@@ -13214,17 +13257,16 @@ to connect to your normal Raspberry Pi.</text>
 <pinref part="P+8" gate="1" pin="+5V"/>
 <wire x1="358.14" y1="30.48" x2="358.14" y2="33.02" width="0.1524" layer="91"/>
 </segment>
-</net>
-<net name="N$57" class="0">
 <segment>
 <pinref part="U3" gate="A" pin="VDD"/>
-<wire x1="2.54" y1="124.46" x2="20.32" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="20.32" y1="124.46" x2="2.54" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="P+6" gate="1" pin="+5V"/>
+<wire x1="2.54" y1="124.46" x2="2.54" y2="127" width="0.1524" layer="91"/>
 <pinref part="U1" gate="A" pin="VDD"/>
 <wire x1="20.32" y1="53.34" x2="2.54" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="53.34" x2="2.54" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="U3" gate="A" pin="A0"/>
 <wire x1="2.54" y1="71.12" x2="2.54" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="2.54" y1="109.22" x2="2.54" y2="124.46" width="0.1524" layer="91"/>
 <wire x1="20.32" y1="111.76" x2="17.78" y2="111.76" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="111.76" x2="17.78" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="U3" gate="A" pin="A1"/>
@@ -13234,7 +13276,6 @@ to connect to your normal Raspberry Pi.</text>
 <pinref part="U3" gate="A" pin="A2"/>
 <wire x1="17.78" y1="106.68" x2="20.32" y2="106.68" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="109.22" x2="2.54" y2="109.22" width="0.1524" layer="91"/>
-<junction x="2.54" y="109.22"/>
 <pinref part="U1" gate="A" pin="*RESET"/>
 <wire x1="55.88" y1="55.88" x2="60.96" y2="55.88" width="0.1524" layer="91"/>
 <pinref part="U3" gate="A" pin="*RESET"/>
@@ -13244,8 +13285,9 @@ to connect to your normal Raspberry Pi.</text>
 <wire x1="60.96" y1="71.12" x2="2.54" y2="71.12" width="0.1524" layer="91"/>
 <junction x="60.96" y="71.12"/>
 <junction x="2.54" y="71.12"/>
-<pinref part="P+6" gate="1" pin="+5V"/>
-<wire x1="2.54" y1="127" x2="2.54" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="124.46" x2="2.54" y2="109.22" width="0.1524" layer="91"/>
+<junction x="2.54" y="124.46"/>
+<junction x="2.54" y="109.22"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -13454,11 +13496,16 @@ to connect to your normal Raspberry Pi.</text>
 <wire x1="256.54" y1="205.74" x2="246.38" y2="205.74" width="0.1524" layer="91"/>
 <pinref part="SJ1" gate="G$1" pin="1"/>
 <wire x1="246.38" y1="205.74" x2="246.38" y2="195.58" width="0.1524" layer="91"/>
+<wire x1="256.54" y1="226.06" x2="256.54" y2="238.76" width="0.1524" layer="91"/>
+<junction x="256.54" y="226.06"/>
+<pinref part="R50" gate="G$1" pin="2"/>
+<wire x1="304.8" y1="236.22" x2="304.8" y2="238.76" width="0.1524" layer="91"/>
+<wire x1="256.54" y1="238.76" x2="304.8" y2="238.76" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<label x="289.56" y="147.32" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="294.64" y="152.4" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="R44" gate="G$1" pin="2"/>
-<wire x1="294.64" y1="147.32" x2="289.56" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="294.64" y1="147.32" x2="294.64" y2="152.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$55" class="0">
@@ -13586,33 +13633,10 @@ to connect to your normal Raspberry Pi.</text>
 <pinref part="J1" gate="G$1" pin="4"/>
 </segment>
 </net>
-<net name="N$29" class="0">
-<segment>
-<pinref part="JP3" gate="A" pin="1"/>
-<wire x1="223.52" y1="193.04" x2="231.14" y2="193.04" width="0.1524" layer="91"/>
-<wire x1="231.14" y1="193.04" x2="231.14" y2="208.28" width="0.1524" layer="91"/>
-<wire x1="231.14" y1="208.28" x2="165.1" y2="208.28" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="VCC"/>
-</segment>
-</net>
-<net name="N$47" class="0">
-<segment>
-<pinref part="JP3" gate="A" pin="3"/>
-<wire x1="223.52" y1="187.96" x2="195.58" y2="187.96" width="0.1524" layer="91"/>
-<pinref part="Q5" gate="G$1" pin="G"/>
-</segment>
-</net>
-<net name="N$69" class="0">
-<segment>
-<pinref part="R39" gate="G$1" pin="1"/>
-<pinref part="Q5" gate="G$1" pin="D"/>
-<wire x1="203.2" y1="177.8" x2="200.66" y2="177.8" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$71" class="0">
 <segment>
 <pinref part="D1" gate="G$1" pin="BLU"/>
-<wire x1="187.96" y1="177.8" x2="187.96" y2="180.34" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="170.18" x2="187.96" y2="180.34" width="0.1524" layer="91"/>
 <pinref part="R41" gate="G$1" pin="2"/>
 </segment>
 </net>
@@ -13631,23 +13655,25 @@ to connect to your normal Raspberry Pi.</text>
 </net>
 <net name="SHUTDOWN" class="0">
 <segment>
-<pinref part="R47" gate="G$1" pin="1"/>
-<label x="284.48" y="195.58" size="1.778" layer="95" xref="yes"/>
-<pinref part="SJ4" gate="1" pin="2"/>
-<wire x1="284.48" y1="198.12" x2="284.48" y2="182.88" width="0.1524" layer="91"/>
-<wire x1="279.4" y1="198.12" x2="284.48" y2="198.12" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <wire x1="325.12" y1="2.54" x2="317.5" y2="2.54" width="0.1524" layer="91"/>
 <label x="317.5" y="2.54" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="X2" gate="-14" pin="1"/>
-<pinref part="TP9" gate="G$1" pin="TP"/>
-<wire x1="317.5" y1="0" x2="317.5" y2="2.54" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <wire x1="55.88" y1="10.16" x2="63.5" y2="10.16" width="0.1524" layer="91"/>
 <label x="63.5" y="10.16" size="1.778" layer="95" xref="yes"/>
 <pinref part="U1" gate="A" pin="GPB7"/>
+</segment>
+<segment>
+<pinref part="Q6" gate="G$1" pin="D"/>
+<pinref part="R50" gate="G$1" pin="1"/>
+<wire x1="304.8" y1="223.52" x2="304.8" y2="226.06" width="0.1524" layer="91"/>
+<junction x="304.8" y="223.52"/>
+<wire x1="304.8" y1="223.52" x2="314.96" y2="223.52" width="0.1524" layer="91"/>
+<label x="317.5" y="223.52" size="1.778" layer="95" xref="yes"/>
+<pinref part="TP10" gate="G$1" pin="TP"/>
+<wire x1="314.96" y1="223.52" x2="317.5" y2="223.52" width="0.1524" layer="91"/>
+<junction x="314.96" y="223.52"/>
 </segment>
 </net>
 <net name="SDA_OUT" class="0">
@@ -13730,14 +13756,8 @@ to connect to your normal Raspberry Pi.</text>
 <pinref part="R40" gate="G$1" pin="2"/>
 <wire x1="180.34" y1="180.34" x2="180.34" y2="177.8" width="0.1524" layer="91"/>
 <pinref part="D1" gate="G$1" pin="GRN"/>
-<wire x1="180.34" y1="177.8" x2="185.42" y2="177.8" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$72" class="0">
-<segment>
-<pinref part="D1" gate="G$1" pin="RED"/>
-<wire x1="190.5" y1="177.8" x2="195.58" y2="177.8" width="0.1524" layer="91"/>
-<pinref part="Q5" gate="G$1" pin="S"/>
+<wire x1="185.42" y1="170.18" x2="185.42" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="185.42" y1="177.8" x2="180.34" y2="177.8" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$54" class="0">
@@ -13805,6 +13825,13 @@ to connect to your normal Raspberry Pi.</text>
 <segment>
 <pinref part="R41" gate="G$1" pin="1"/>
 <wire x1="187.96" y1="208.28" x2="187.96" y2="190.5" width="0.1524" layer="91"/>
+<pinref part="JP3" gate="A" pin="1"/>
+<wire x1="223.52" y1="193.04" x2="228.6" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="193.04" x2="228.6" y2="208.28" width="0.1524" layer="91"/>
+<wire x1="228.6" y1="208.28" x2="187.96" y2="208.28" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="VCC"/>
+<wire x1="187.96" y1="208.28" x2="165.1" y2="208.28" width="0.1524" layer="91"/>
+<junction x="187.96" y="208.28"/>
 </segment>
 </net>
 <net name="N$84" class="0">
@@ -13832,6 +13859,55 @@ to connect to your normal Raspberry Pi.</text>
 <pinref part="X1" gate="-3" pin="1"/>
 <wire x1="107.95" y1="15.24" x2="109.22" y2="15.24" width="0.1524" layer="91"/>
 <junction x="107.95" y="15.24"/>
+</segment>
+</net>
+<net name="SHUTDOWN_OLD" class="0">
+<segment>
+<pinref part="R47" gate="G$1" pin="1"/>
+<pinref part="SJ4" gate="1" pin="2"/>
+<wire x1="284.48" y1="198.12" x2="284.48" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="279.4" y1="198.12" x2="284.48" y2="198.12" width="0.1524" layer="91"/>
+<wire x1="284.48" y1="198.12" x2="284.48" y2="218.44" width="0.1524" layer="91"/>
+<junction x="284.48" y="198.12"/>
+<wire x1="284.48" y1="218.44" x2="294.64" y2="218.44" width="0.1524" layer="91"/>
+<pinref part="Q6" gate="G$1" pin="G"/>
+</segment>
+</net>
+<net name="N$69" class="0">
+<segment>
+<pinref part="R39" gate="G$1" pin="1"/>
+<pinref part="Q5" gate="G$1" pin="D"/>
+<wire x1="200.66" y1="177.8" x2="200.66" y2="180.34" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$47" class="0">
+<segment>
+<pinref part="R51" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="190.5" x2="210.82" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="193.04" x2="210.82" y2="193.04" width="0.1524" layer="91"/>
+<pinref part="Q5" gate="G$1" pin="G"/>
+<wire x1="195.58" y1="190.5" x2="195.58" y2="193.04" width="0.1524" layer="91"/>
+<pinref part="Q7" gate="G$1" pin="D"/>
+<wire x1="210.82" y1="198.12" x2="210.82" y2="193.04" width="0.1524" layer="91"/>
+<junction x="210.82" y="193.04"/>
+</segment>
+</net>
+<net name="N$57" class="0">
+<segment>
+<pinref part="JP3" gate="A" pin="6"/>
+<wire x1="223.52" y1="180.34" x2="231.14" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="Q7" gate="G$1" pin="G"/>
+<wire x1="231.14" y1="180.34" x2="231.14" y2="203.2" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="203.2" x2="220.98" y2="203.2" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$74" class="0">
+<segment>
+<pinref part="D1" gate="G$1" pin="RED"/>
+<wire x1="190.5" y1="170.18" x2="190.5" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="177.8" x2="195.58" y2="177.8" width="0.1524" layer="91"/>
+<pinref part="Q5" gate="G$1" pin="S"/>
+<wire x1="195.58" y1="177.8" x2="195.58" y2="180.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
