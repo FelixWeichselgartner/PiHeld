@@ -43,7 +43,7 @@ disable_overscan=1
 #arm_freq=800
 
 # Uncomment some or all of these to enable the optional hardware interfaces
-dtparam=i2c_arm=on,i2c_arm_baudrate=1700000
+dtparam=i2c_arm=on,i2c_arm_baudrate=400000
 #dtparam=i2s=on
 dtparam=spi=on
 

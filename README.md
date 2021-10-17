@@ -14,7 +14,7 @@ TODO: Here include all parts and how to build the system.
 
 ## Developer information
 
-For Documentation check out [this](./doc/README.md).
+For Documentation check out [this](./doc/).
 
 TODO: Here include information needed for developers.
 

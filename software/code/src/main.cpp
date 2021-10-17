@@ -9,14 +9,32 @@ using namespace std;
 #include <ctime>    
 
 
+const int start_test_sequence = 0x0100;
+const int end_test_sequence = 0x0300;
+Byte sequence_array[end_test_sequence - start_test_sequence] = { 0 };
+
+
 void testSequence(Cartridge *cartridge) {
-        for (int j = 0; j < 4; j++) {
+    for (int j = 0; j < 4; j++) {
         cout << "test " << j << endl;
-        for (int i = 0x0100; i < 0x0300; i++) {
+        for (int i = start_test_sequence; i < end_test_sequence; i++) {
             if ((i % 0x10) == 0x00) {
                 cout << HEX16 << (int)i << " |  ";
             }
-            cout << HEX << (int)cartridge->gpio.getByte(i);
+
+            Byte current_byte = cartridge->gpio.getByte(i);
+            cout << HEX << (int)current_byte;
+
+            if (j == 0) {
+                sequence_array[i - start_test_sequence] = current_byte;
+            } else {
+                if (sequence_array[i - start_test_sequence] != current_byte) {
+                    cout << "w";
+                } else {
+                    cout << "r";
+                }
+            }
+
             if ((i & 0x0f) == 0x0f) {
                 cout << endl;
             } else {
@@ -66,7 +84,7 @@ int main() {
     
     //testSequence(&cartridge);
     //bankSwitchTest(&cartridge);
-//    return 0;
+    //return 0;
 
     
     cartridge.DumpROM();
