@@ -1,18 +1,21 @@
 import time
+from ads1015_helper import ADS1015_Helper
 
 
-DEBUG = False
+DEBUG = True
 
 
 class LiPo:
-    def __init__(self, adc_vref, adc_res):
-        self.adc_ref = adc_vref
-        self.adc_res = adc_res
+    def __init__(self):
+        self.adc = ADS1015_Helper()
 
-        self.LiPo_pin = 2
+        # this depends on what you soldered in:
+        # as most resistors can very on multiple percents its a good idea to measure before soldering,
+        # or you test with a defined voltage (measure the lipo) and adjust the values to fit.
 
-        voltageDivider_res1 = 330e3
-        voltageDivider_res2 = 1e6 
+        # for me this fits... im shocked (used 320 kohms and 1Mohm)...
+        voltageDivider_res1 = 400e3
+        voltageDivider_res2 = 10e5
         self.voltageDivider = voltageDivider_res2 / (voltageDivider_res1 + voltageDivider_res2)
 
         self.setup()
@@ -35,22 +38,24 @@ class LiPo:
             self.lookup_percentage.append(i * self.percentage_steps)
             self.lookup_state.append(False if i < 4 else True)
 
-    def get(self):
-        codeWord = 0
-        n = 20
-        for i in range(n):
-            # todo: replace this by i2c ads1015
-            codeWord += analogRead(self.LiPo_pin)
-            time.sleep(0.01)
-        codeWord /= n
-
         if DEBUG:
-            print(codeWord)
+            print(self.lookup_percentage)
+            print(self.lookup_state)
+            print(self.lookup_voltage)
+
+    def get(self):
+        currentVoltage_mV = 0
+        n = 15
+        for i in range(n):
+            currentVoltage_mV += self.adc.voltage()
+            time.sleep(0.2)
+        currentVoltage_mV /= n
         
         # calculate the current voltage
-        currentVoltage_mV = codeWord / self.voltageDivider * self.adc_ref / self.adc_res
+        currentVoltage_mV = currentVoltage_mV / self.voltageDivider
 
         if DEBUG:
+            #print(self.adc.voltage())
             print(currentVoltage_mV)
 
         # interpolate battery percentage and status
@@ -66,19 +71,21 @@ class LiPo:
         if DEBUG:
             print(t_x)
 
-        if (t_x < 20):
+        if t_x == 0 or t_x > 20:
+            percentageLoaded = self.lookup_percentage[t_x]
+        else:
             lower_voltage = self.lookup_voltage[t_x]
             higher_voltage = self.lookup_voltage[t_x + 1]
             step_delta = higher_voltage - lower_voltage
             current_lower_offset = currentVoltage_mV - lower_voltage
             percentageLoaded = self.lookup_percentage[t_x] + self.percentage_steps * current_lower_offset / step_delta
-        else:
-            percentageLoaded = self.lookup_percentage[t_x]
 
         status = self.lookup_state[t_x]
 
         return int(percentageLoaded + 0.5), status
 
 
-lipo = LiPo(3300, 2 ** 12)
-print(lipo.get())
+lipo = LiPo()
+while True:
+    time.sleep(3)
+    print(lipo.get())
