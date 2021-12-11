@@ -29,7 +29,25 @@ void setup() {
 }
 
 
-void loop() {
+void loop_data() {
+    for (int i = 0; i < 8; i++) {
+        setDataPins(1 << i);
+        mssleep(20);
+    }
+    setDataPins(0x00);
+}
+
+
+void loop_address() {
+    for (int i = 0; i < 16; i++) {
+        gpio.setAddress(1 << i);
+        mssleep(20);
+    }
+    gpio.setAddress(0x0000);
+}
+
+
+void loop_misc() {
     gpio.wr_low();
     mssleep(20);
     gpio.wr_high();
@@ -39,18 +57,13 @@ void loop() {
     gpio.cs_low();
     mssleep(20);
     gpio.cs_high();
+}
 
-    for (int i = 0; i < 16; i++) {
-        gpio.setAddress(1 << i);
-        mssleep(20);
-    }
-    gpio.setAddress(0x0000);
 
-    for (int i = 0; i < 8; i++) {
-        setDataPins(1 << i);
-        mssleep(20);
-    }
-    setDataPins(0x00);
+void loop() {
+    loop_misc();
+    loop_data();
+    loop_address();
 }
 
 

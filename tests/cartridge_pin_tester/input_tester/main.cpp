@@ -8,7 +8,7 @@ using namespace std;
 GPIO gpio;
 
 
-void mssleep(int msec) {
+void mssleep(float msec) {
     usleep(msec * 1000);
 }
 
@@ -33,19 +33,19 @@ int main() {
         do {
             do {
 
-            } while(gpio.getByte(0x00) != 0xff);
+            } while(gpio.getByte(0x0000) != 0xff);
             mssleep(1);
-        } while(gpio.getByte(0x00) != 0xff);
+        } while(gpio.getByte(0x0000) != 0xff);
         mssleep(5);
 
         for (current_data = 0x00; current_data < 0x100; current_data++) {
             int err = 0;
             do {
-                c = gpio.getByte(0x00);
+                c = gpio.getByte(0x0000);
                 err++;
                 if (err > 6) {
                     cout << "could not find " << HEX << (int)current_data << " -> ";
-                    current_data = gpio.getByte(0x00) + 1;
+                    current_data = gpio.getByte(0x0000) + 1;
                     cout << "continueing with " << HEX << (int)current_data << endl;
                     error_flag = 1;
                     break;
@@ -53,7 +53,7 @@ int main() {
                 mssleep(2);
             } while (c != current_data);
             
-            if (err <= 5) {
+            if (err <= 6) {
                 cout << HEX << (int)c;
                 if ((c & 0x0F) == 0x0F) {
                     cout << endl;
