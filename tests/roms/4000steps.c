@@ -13,7 +13,7 @@ void main(int argc, char* argv[]) {
     size_t size;
     do {
         size = fread(buffer, 1, sizeof(buffer), fp);
-        printf("size:%i\n", size);
+        //printf("size:%i\n", size);
         printf("%i: %x\n", i, (unsigned char)buffer[0]);
         i++;
     } while (size == 0x4000);

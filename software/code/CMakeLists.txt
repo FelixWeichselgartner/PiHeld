@@ -7,7 +7,9 @@ find_package(WiringPi REQUIRED)
 
 file(GLOB SOURCES 
     "src/*.hpp"
-    "src/*.cpp"
+    "src/Cartridge.cpp"
+    "src/GPIO.cpp"
+    "src/main.cpp"
 )
 
 # Include headers
