@@ -1,10 +1,12 @@
-#include "GPIO.hpp"
+// https://www.kernel.org/doc/Documentation/i2c/dev-interface
 
 #include <iostream>
 using namespace std;
+#include "GPIO.hpp"
+#include "MCP23017.hpp"
 
 
-GPIO gpio;
+GPIO *gpio;
 
 
 void mssleep(int msec) {
@@ -13,19 +15,15 @@ void mssleep(int msec) {
 
 
 void setDataPins(Byte data) {
-    for (int i = 0; i < 8; i++) {
-        digitalWrite(100 + i, data & (1 << i));
-    }
+    gpio->mcp_data_misc->writePort(MCP23017Port::A, data);
 }
 
 
-void setup() {
-    gpio.dataOutput();
+void mysetup() {
+    gpio->dataOutput();
     setDataPins(0x00);
-    gpio.setAddress(0x0000);
-    gpio.wr_high();
-    gpio.rd_high();
-    gpio.cs_high();
+    gpio->setAddress(0x0000);
+    gpio->wr_rd_cs_high();
 }
 
 
@@ -40,23 +38,24 @@ void loop_data() {
 
 void loop_address() {
     for (int i = 0; i < 16; i++) {
-        gpio.setAddress(1 << i);
+        gpio->setAddress(1 << i);
         mssleep(20);
     }
-    gpio.setAddress(0x0000);
+    gpio->setAddress(0x0000);
 }
 
 
 void loop_misc() {
-    gpio.wr_low();
+    gpio->wr_low();
     mssleep(20);
-    gpio.wr_high();
-    gpio.rd_low();
+    gpio->wr_high();
+    gpio->rd_low();
     mssleep(20);
-    gpio.rd_high();
-    gpio.cs_low();
+    gpio->rd_high();
+    gpio->cs_low();
     mssleep(20);
-    gpio.cs_high();
+    gpio->cs_high();
+    mssleep(20);
 }
 
 
@@ -67,11 +66,18 @@ void loop() {
 }
 
 
-int main() {
+void setup() {
+    cout << "creating GPIO object" << endl;
+    gpio = new GPIO();
     cout << "You started the output pin tester!" << endl;
 
+    mysetup();
+}
+
+
+int main() {
     setup();
-    while(true) {
+    while(1) {
         loop();
     }
 

@@ -1,16 +1,18 @@
 #ifndef GPIO_HPP_
 #define GPIO_HPP_
 
-#include <wiringPi.h>
-#include <mcp23017.h>
+#include "MCP23017.hpp"
 #include "datatypes.h"
-#include <unistd.h>
+
+#define i2c_address_ioe_address 0x27
+#define i2c_address_ioe_data_misc 0x20
 
 class GPIO {
 
 public:
 
     GPIO();
+    ~GPIO();
 
     void setAddress(Word);
     Byte getByte(Word);
@@ -22,15 +24,17 @@ public:
     void rd_high();
     void cs_low();
     void cs_high();
+    void wr_rd_cs_high();
 
     void dataInput();
     void dataOutput();
 
 public:
-
+    //Byte wr_rd_cs_state;
+    int _bus;
     Word lastAddress = 0;
-    int i2c_address_ioe_address = 0x27, i2c_address_ioe_data_misc = 0x20;
-    int base_io_expander_address = 120, base_io_expander_data_misc = 100;
+    
+    MCP23017 *mcp_address, *mcp_data_misc;
     int wrPin = 8, rdPin = 9, csPin = 10;
 
 };
