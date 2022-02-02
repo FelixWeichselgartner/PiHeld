@@ -21,7 +21,7 @@ TODO: Here include information needed for developers.
 # Further improvements (to-do list):
 
 * Add a HDMI (or Mini-HDMI) Connector to the CM4 (on display-pcb) to give the user a Nintendo Switch like experience.
-* Make a version compatible with the Raspberry Pi Zero, as it is cheaper and more commenly used.
+* Make a version compatible with the Raspberry Pi Zero, as it is cheaper and more commonly used.
 * Make a version that fits in a GameBoy Color/Pocket shell. As those only have one pcb inside, the display and cartridge pcb could be combined to a single pcb. This would make the production part significantly easier.
 * Make the USB-Charging port bidirectional. This enables users to connect e.g. a keyboard to the device (USB OTG).
 * Update the software to enable users to interface with GameBoy Color cartridges.
