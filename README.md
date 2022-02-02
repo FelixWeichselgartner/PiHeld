@@ -2,7 +2,7 @@
 
 This project is the first Raspberry Pi based handheld console to include a GameBoy cartridge reader.
 
-So far the PCBs are still untested. Be a bit more patient of you want to use the PCBs ;).
+The PCBs are under active testing and will a working prototype should be available soon. Be a bit more patient of you want to use the PCBs ;).
 
 ## Preview
 
@@ -31,10 +31,11 @@ TODO: Here include information needed for developers.
 
 ## License
 
-This project is completely open source, as we want everybody to be able to build their own EmbeddedBoy. Check out the `License.md` file to get further information on licensing. Since this project is open source, we would be happy if you want to support the project (see below).
+This project is completely open source, as we want everybody to be able to build their own EmbeddedBoy. Check out the `License.md` file to get further information on licensing.
 
 ## Split-off projects
 
 * https://github.com/FelixWeichselgartner/Arduino_Logic_Analyzer
 * https://github.com/FelixWeichselgartner/Adafruit_PowerBoost_SaveShutdown
 * https://github.com/FelixWeichselgartner/RPi-I2C-LevelShifter
+* https://github.com/FelixWeichselgartner/rpi-mcp23017

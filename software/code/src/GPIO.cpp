@@ -1,54 +1,50 @@
 #include "GPIO.hpp"
+#include "MCP23017.hpp"
 
 #include <iostream>
 using namespace std;
 
 GPIO::GPIO() {
-    if (!wiringPiSetup())
-    {
-        cout << "WiringPi Setup was successfull." << endl;
-    }
+    int adapter_nr = 1; // for RPi B version
+    std::string filename = "/dev/i2c-" + std::to_string(adapter_nr);
 
-    mcp23017Setup(base_io_expander_address, i2c_address_ioe_address);
-    mcp23017Setup(base_io_expander_data_misc, i2c_address_ioe_data_misc);
+	cout << filename.c_str() << endl;
+
+    _bus = open(filename.c_str(), O_RDWR);
+    if (_bus < 0) {
+        cout << "ERROR 1 HANDLING; you can check errno to see what went wrong" << endl;
+        exit(1);
+    }
+    
+    mcp_address = new MCP23017(_bus, i2c_address_ioe_address);
+    mcp_data_misc = new MCP23017(_bus, i2c_address_ioe_data_misc);
+
+    mcp_address->init();
+    mcp_data_misc->init();
 
     // address pins.
-    for (int i = 0; i < 16; i++) {
-        pinMode(base_io_expander_address + i, OUTPUT);
-    }
+    mcp_address->portMode(MCP23017Port::A, 0); //Port A as output
+    mcp_address->portMode(MCP23017Port::B, 0); //Port B as output
 
     // data pins.
     this->dataInput();
+    //this->dataOutput();
 
-    // wr pin.
-    pinMode(base_io_expander_data_misc + wrPin, OUTPUT);
-    // rd pin.
-    pinMode(base_io_expander_data_misc + rdPin, OUTPUT);
-    // cs pin.
-    pinMode(base_io_expander_data_misc + csPin, OUTPUT);
+    // wr, rd, cs pin.
+    mcp_data_misc->portMode(MCP23017Port::B, 0b11111000); //Port A as output
 
-    this->wr_high();
-    this->rd_high();
-    this->cs_high();
+    this->wr_rd_cs_high();
 
-    // set the lastAddress to 0x0000;
-    lastAddress = 0;
-    for (int i = 0; i < 16; i++) {
-        digitalWrite(base_io_expander_address + i, 0);
-    }
+    mcp_address->write(0x00);
+}
+
+GPIO::~GPIO() {
+    // TODO: check this.
+	close(_bus);
 }
 
 void GPIO::setAddress(Word address) { 
-    for (int i = 0; i < 16; i++) {
-        // this reduced this time needed for cartridge reading about 50%
-        // we only need to write if the pin actually changed.
-        // this should reduce the time for dumping significantly.
-        if (((address & 0xFFFF) & (1 << i)) != ((lastAddress & 0xFFFF) & (1 << i))) {
-            digitalWrite(base_io_expander_address + i, ((address & 0xFFFF) & (1 << i)) == (1 << i));
-        }
-    }
-
-    lastAddress = address;
+    mcp_address->write(address);
 }
 
 Byte GPIO::getByte(Word address) {
@@ -57,12 +53,7 @@ Byte GPIO::getByte(Word address) {
     this->cs_low();
     usleep(10);
 
-    Byte val = 0x00;
-    for (int i = 0; i < 8; i++) {
-        if (digitalRead(base_io_expander_data_misc + i)) {
-            val |= (0x01 << i);
-        }
-    }
+    Byte val = mcp_data_misc->readRegister(MCP23017Register::GPIO_A);
 
     this->rd_high();
     this->cs_high();
@@ -73,11 +64,11 @@ Byte GPIO::getByte(Word address) {
 
 void GPIO::setByte(Word address, Byte data) {
     this->dataOutput();
+    //usleep(1000);
 
     setAddress(address);
-    for (int i = 0; i < 8; i++) {
-        digitalWrite(base_io_expander_data_misc + i, data & (1 << i));
-    }
+    mcp_data_misc->writePort(MCP23017Port::A, data);
+    usleep(10);
 
     this->wr_low();
     usleep(10);
@@ -85,40 +76,62 @@ void GPIO::setByte(Word address, Byte data) {
     usleep(10);
 
     this->dataInput();
+    //usleep(1000);
 }
 
 void GPIO::wr_low() {
-    digitalWrite(base_io_expander_data_misc + wrPin, LOW);
+    //this->wr_rd_cs_state = resetBit(this->wr_rd_cs_state, 0)
+    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
+
+    mcp_data_misc->digitalWrite(wrPin, LOW);
 }
 
 void GPIO::wr_high() {
-    digitalWrite(base_io_expander_data_misc + wrPin, HIGH);
+    //this->wr_rd_cs_state = setBit(this->wr_rd_cs_state, 0)
+    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
+
+    mcp_data_misc->digitalWrite(wrPin, HIGH);
 }
 
 void GPIO::rd_low() {
-    digitalWrite(base_io_expander_data_misc + rdPin, LOW);
+    //this->wr_rd_cs_state = resetBit(this->wr_rd_cs_state, 1);
+    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
+
+    mcp_data_misc->digitalWrite(rdPin, LOW);
 }
 
 void GPIO::rd_high() {
-    digitalWrite(base_io_expander_data_misc + rdPin, HIGH);
+    //this->wr_rd_cs_state = setBit(this->wr_rd_cs_state, 1);
+    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
+
+    mcp_data_misc->digitalWrite(rdPin, HIGH);
 }
 
 void GPIO::cs_low() {
-    digitalWrite(base_io_expander_data_misc + csPin, LOW);
+    //this->wr_rd_cs_state = resetBit(this->wr_rd_cs_state, 2);
+    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
+
+    mcp_data_misc->digitalWrite(csPin, LOW);
 }
 
 void GPIO::cs_high() {
-    digitalWrite(base_io_expander_data_misc + csPin, HIGH);
+    //this->wr_rd_cs_state = setBit(this->wr_rd_cs_state, 2);
+    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
+
+    mcp_data_misc->digitalWrite(csPin, HIGH);
+}
+
+void GPIO::wr_rd_cs_high() {
+    //this->wr_rd_cs_state = 0b00000111;
+    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
+
+    mcp_data_misc->writePort(MCP23017Port::B, 0b00000111);
 }
 
 void GPIO::dataInput() {
-    for (int i = 0; i < 8; i++) {
-        pinMode(base_io_expander_data_misc + i, INPUT);
-    }
+    mcp_data_misc->portMode(MCP23017Port::A, 0xFF); //Port A as input
 }
 
 void GPIO::dataOutput() {
-    for (int i = 0; i < 8; i++) {
-        pinMode(base_io_expander_data_misc + i, OUTPUT);
-    }
+    mcp_data_misc->portMode(MCP23017Port::A, 0); //Port A as output
 }

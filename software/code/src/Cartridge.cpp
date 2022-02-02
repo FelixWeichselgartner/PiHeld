@@ -41,7 +41,6 @@ void Cartridge::ReadHeader() {
     // Read Cartridge Header
     for (int addr = 0x0134; addr <= 0x143; addr++) {
         char headerChar = (char) this->gpio.getByte(addr);
-        cout << "char " << HEX << (int)headerChar << " " << endl;
         if ((headerChar >= 0x30 && headerChar <= 0x57) || // 0-9
             (headerChar >= 0x41 && headerChar <= 0x5A) || // A-Z
             (headerChar >= 0x61 && headerChar <= 0x7A)) { // a-z
