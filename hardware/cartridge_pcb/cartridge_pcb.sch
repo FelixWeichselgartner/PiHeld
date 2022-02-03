@@ -153,31 +153,12 @@
 <text x="-2.54" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
 </symbol>
-<symbol name="VCC">
-<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
-<text x="-2.54" y="-2.54" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-<pin name="VCC" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
-</symbol>
 </symbols>
 <devicesets>
 <deviceset name="GND" prefix="GND">
 <description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
 <gates>
 <gate name="1" symbol="GND" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="VCC" prefix="P+">
-<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
-<gates>
-<gate name="VCC" symbol="VCC" x="0" y="0"/>
 </gates>
 <devices>
 <device name="">
@@ -11849,7 +11830,6 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="R33" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K"/>
-<part name="P+3" library="supply1" deviceset="VCC" device=""/>
 <part name="Q1" library="transistors_gaui" deviceset="2N7002" device=""/>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1K"/>
 <part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K"/>
@@ -11945,6 +11925,7 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="SJ2" library="jumper" library_urn="urn:adsk.eagle:library:252" deviceset="SJ2W" device="" package3d_urn="urn:adsk.eagle:package:15474/1"/>
 <part name="SJ3" library="jumper" library_urn="urn:adsk.eagle:library:252" deviceset="SJ2W" device="" package3d_urn="urn:adsk.eagle:package:15474/1"/>
 <part name="SJ1" library="jumper" library_urn="urn:adsk.eagle:library:252" deviceset="SJ" device="" package3d_urn="urn:adsk.eagle:package:15471/1"/>
+<part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -12110,9 +12091,6 @@ available</text>
 <instance part="R33" gate="G$1" x="177.8" y="33.02" smashed="yes" rot="R90">
 <attribute name="NAME" x="176.3014" y="29.21" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="181.102" y="29.21" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="P+3" gate="VCC" x="177.8" y="22.86" smashed="yes" rot="R180">
-<attribute name="VALUE" x="180.34" y="25.4" size="1.778" layer="96" rot="R270"/>
 </instance>
 <instance part="Q1" gate="G$1" x="38.1" y="185.42" smashed="yes" rot="R270">
 <attribute name="VALUE" x="38.1" y="196.85" size="1.778" layer="96" rot="R270"/>
@@ -12510,6 +12488,9 @@ available</text>
 <attribute name="NAME" x="271.78" y="200.66" size="1.778" layer="95"/>
 <attribute name="VALUE" x="271.78" y="194.31" size="1.778" layer="96"/>
 </instance>
+<instance part="P+3" gate="1" x="172.72" y="27.94" smashed="yes">
+<attribute name="VALUE" x="170.18" y="22.86" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -12703,13 +12684,6 @@ available</text>
 <pinref part="GND20" gate="1" pin="GND"/>
 <pinref part="Q7" gate="G$1" pin="S"/>
 <wire x1="205.74" y1="203.2" x2="210.82" y2="203.2" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="VCC" class="0">
-<segment>
-<pinref part="R33" gate="G$1" pin="1"/>
-<pinref part="P+3" gate="VCC" pin="VCC"/>
-<wire x1="177.8" y1="27.94" x2="177.8" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -13288,6 +13262,12 @@ available</text>
 <wire x1="2.54" y1="124.46" x2="2.54" y2="109.22" width="0.1524" layer="91"/>
 <junction x="2.54" y="124.46"/>
 <junction x="2.54" y="109.22"/>
+</segment>
+<segment>
+<pinref part="R33" gate="G$1" pin="1"/>
+<wire x1="177.8" y1="27.94" x2="177.8" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="P+3" gate="1" pin="+5V"/>
+<wire x1="177.8" y1="25.4" x2="172.72" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
