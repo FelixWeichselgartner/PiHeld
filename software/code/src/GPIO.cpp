@@ -39,7 +39,6 @@ GPIO::GPIO() {
 }
 
 GPIO::~GPIO() {
-    // TODO: check this.
 	close(_bus);
 }
 
@@ -51,80 +50,57 @@ Byte GPIO::getByte(Word address) {
     this->setAddress(address);
     this->rd_low();
     this->cs_low();
-    usleep(10);
+    usleep(std_delay);
 
     Byte val = mcp_data_misc->readRegister(MCP23017Register::GPIO_A);
 
     this->rd_high();
     this->cs_high();
-    usleep(10);
+    usleep(std_delay);
     
     return val;
 }
 
 void GPIO::setByte(Word address, Byte data) {
     this->dataOutput();
-    //usleep(1000);
 
     setAddress(address);
     mcp_data_misc->writePort(MCP23017Port::A, data);
-    usleep(10);
+    usleep(std_delay);
 
     this->wr_low();
-    usleep(10);
+    usleep(std_delay);
     this->wr_high();
-    usleep(10);
+    usleep(std_delay);
 
     this->dataInput();
-    //usleep(1000);
 }
 
 void GPIO::wr_low() {
-    //this->wr_rd_cs_state = resetBit(this->wr_rd_cs_state, 0)
-    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
-
     mcp_data_misc->digitalWrite(wrPin, LOW);
 }
 
 void GPIO::wr_high() {
-    //this->wr_rd_cs_state = setBit(this->wr_rd_cs_state, 0)
-    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
-
     mcp_data_misc->digitalWrite(wrPin, HIGH);
 }
 
 void GPIO::rd_low() {
-    //this->wr_rd_cs_state = resetBit(this->wr_rd_cs_state, 1);
-    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
-
     mcp_data_misc->digitalWrite(rdPin, LOW);
 }
 
 void GPIO::rd_high() {
-    //this->wr_rd_cs_state = setBit(this->wr_rd_cs_state, 1);
-    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
-
     mcp_data_misc->digitalWrite(rdPin, HIGH);
 }
 
 void GPIO::cs_low() {
-    //this->wr_rd_cs_state = resetBit(this->wr_rd_cs_state, 2);
-    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
-
     mcp_data_misc->digitalWrite(csPin, LOW);
 }
 
 void GPIO::cs_high() {
-    //this->wr_rd_cs_state = setBit(this->wr_rd_cs_state, 2);
-    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
-
     mcp_data_misc->digitalWrite(csPin, HIGH);
 }
 
 void GPIO::wr_rd_cs_high() {
-    //this->wr_rd_cs_state = 0b00000111;
-    //mcp_data_misc->writePort(MCP23017Port::B, this->wr_rd_cs_state);
-
     mcp_data_misc->writePort(MCP23017Port::B, 0b00000111);
 }
 

@@ -1,6 +1,30 @@
 #include "Cartridge.hpp"
 #include "format.hpp"
 
+char illegal_char[9] = {'/', '<', '>', ':', '\"', '\\', '|', '?', '*'};
+
+
+string validateFilename(string input) {
+    string output = "";
+
+    for (int i = 0; i < input.length(); i++) {
+        char c = input[i];
+        bool isValid = true;
+
+        isValid = isValid && !(c >= 0 && c <= 31);
+        for (int l = 0; l < 9; l++) {
+            isValid = isValid && !(c == illegal_char[l]);
+        }
+
+        if (isValid) {
+            output += c;
+        }
+    }
+
+    return output;
+}
+
+
 Byte nintendoLogo[] = {
     0xCE, 0xED, 0x66, 0x66, 0xCC, 0x0D, 0x00, 0x0B, 0x03, 0x73, 0x00, 0x83, 0x00, 0x0C, 0x00, 0x0D,
     0x00, 0x08, 0x11, 0x1F, 0x88, 0x89, 0x00, 0x0E, 0xDC, 0xCC, 0x6E, 0xE6, 0xDD, 0xDD, 0xD9, 0x99,
@@ -134,7 +158,7 @@ void Cartridge::DumpROM() {
     streampos size;
     ofstream gbfile;
 
-    string romFileName = /*(string)this->gameTitle*/ "somename.gb";
+    string romFileName = validateFilename((string)this->gameTitle) + ".gb";
     gbfile.open(romFileName, ios::out | ios::binary | ios::ate);
 
     if (gbfile.is_open()) {
@@ -193,8 +217,7 @@ void Cartridge::DumpRAM() {
         streampos size;
         ofstream gbfile;
 
-        //string ramFileName = (string)this->gameTitle + ".sav";
-        string ramFileName = /*(string)this->gameTitle*/ "somename.sav";
+        string ramFileName = validateFilename((string)this->gameTitle) + ".sav";
         gbfile.open(ramFileName, ios::out | ios::binary | ios::ate);
 
         if (gbfile.is_open()) {

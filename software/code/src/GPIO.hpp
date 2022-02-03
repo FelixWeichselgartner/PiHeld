@@ -30,9 +30,10 @@ public:
     void dataOutput();
 
 public:
-    //Byte wr_rd_cs_state;
     int _bus;
     Word lastAddress = 0;
+    // 10 is working flawlessly, change back if 1 makes problems.
+    const int std_delay = 1;
     
     MCP23017 *mcp_address, *mcp_data_misc;
     int wrPin = 8, rdPin = 9, csPin = 10;
