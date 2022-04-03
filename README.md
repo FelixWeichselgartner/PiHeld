@@ -31,7 +31,7 @@ TODO: Here include information needed for developers.
 
 ## License
 
-This project is completely open source, as we want everybody to be able to build their own EmbeddedBoy. Check out the `License.md` file to get further information on licensing.
+This project is completely open source, as we want everybody to be able to build their own PiHeld. Check out the `License.md` file to get further information on licensing.
 
 ## Split-off projects
 
